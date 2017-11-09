@@ -1,0 +1,3 @@
+[submodule "libncgc"]
+	path = libncgc
+	url = https://github.com/angelsl/libncgc.git
