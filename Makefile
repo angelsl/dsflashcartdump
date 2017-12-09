@@ -19,7 +19,6 @@ CXXFLAGS	:=	-g $(ARCH) -O2 -fdiagnostics-color=always \
 				-fomit-frame-pointer -ffast-math \
 				-fno-rtti -fno-exceptions -fno-use-cxa-atexit \
 				-isystem $(LIBNDS)/include -isystem $(LIBFAT)/include \
-				-I$(TOPDIR)/fix_flashcart_core \
 				-I$(TOPDIR)/flashcart_core \
 				-I$(TOPDIR)/libncgc/include
 ASFLAGS		:=	-g $(ARCH)

@@ -28,7 +28,7 @@
 #include "../flashcart_core/device.h"
 
 namespace {
-const std::uint32_t dummy_blowfish_key[0x412] = {0};
+const std::uint8_t dummy_blowfish_key[0x1048] = {0};
 }
 
 namespace flashcart_core {
@@ -42,7 +42,7 @@ int logMessage(log_priority priority, const char *fmt, ...) {
     return -1;
 }
 
-auto getBlowfishKey(BlowfishKey key) -> const std::uint32_t(&)[0x412] {
+auto getBlowfishKey(BlowfishKey key) -> const std::uint8_t(&)[0x1048] {
     static_cast<void>(key);
     // we will never do KEY1 init
     return dummy_blowfish_key;
@@ -182,7 +182,7 @@ int main() {
     }
 
     card.state(ncgc::NTRState::Key2); // assume :)
-    if (!flashcart->initialize(card)) {
+    if (!flashcart->initialize(&card)) {
         iprintf("Flashcart initialisation failed.\n"
                 "Please power off.\n");
         while (true) {
