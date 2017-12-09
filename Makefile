@@ -5,6 +5,8 @@ $(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>dev
 endif
 include $(DEVKITARM)/ds_rules
 
+GAME_TITLE	:=	DS flashcart dumper
+
 TARGET		:=	dsflashcartdump
 BUILD		:=	obj
 
