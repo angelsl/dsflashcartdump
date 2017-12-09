@@ -140,12 +140,20 @@ void dump() {
         iprintf("Failed to mount flashcart SD.\n");
         return;
     }
-    
+
     const std::size_t bsz = sizeof(buffer);
     const std::size_t sz = flashcart->getMaxLength();
     std::size_t cur = 0;
     while (cur < sz) {
         const std::size_t cbsz = std::min(sz - cur, bsz);
+
+        if (!flashcart->initialize(&card)) {
+            iprintf("Flashcart initialisation failed.\n"
+                    "Please power off.\n");
+            while (true) {
+                swiWaitForVBlank();
+            }
+        }
 
         if (!flashcart->readFlash(cur, cbsz, buffer)) {
             iprintf("Flash read failed.\n");
@@ -173,7 +181,7 @@ void dump() {
             iprintf("Failed to mount flashcart SD.\n");
             fail = true;
         }
-        
+
         if (fail) {
             return;
         }
@@ -210,14 +218,6 @@ int main() {
     }
 
     card.state(ncgc::NTRState::Key2); // assume :)
-    if (!flashcart->initialize(&card)) {
-        iprintf("Flashcart initialisation failed.\n"
-                "Please power off.\n");
-        while (true) {
-            swiWaitForVBlank();
-        }
-    }
-
     dump();
 
 fail:
