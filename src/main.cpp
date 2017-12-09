@@ -180,6 +180,9 @@ void dump() {
     }
 
     iprintf("Success.\n");
+    consoleSelect(&bottomScreen);
+    consoleClear();
+    consoleSelect(&topScreen);
 }
 }
 
